@@ -1,7 +1,12 @@
-// const mapStatusHTTPS = require('../utils/mapStatusHTTP');
+const mapStatusHTTPS = require('../utils/mapStatusHTTP');
+const { productsService } = require('../services');
 
-const getAllProducts = async (_req, _res) => {};
+const allProducts = async (_req, res) => {
+  const { status, data } = await productsService.getAllProducts();
+
+  return res.status(mapStatusHTTPS(status)).json(data);
+};
 
 module.exports = {
-  getAllProducts,
+  allProducts,
 };
