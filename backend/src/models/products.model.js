@@ -3,7 +3,7 @@ const connection = require('./connection');
 
 const getAllProductsFromDB = async () => {
   const [products] = await connection.execute(
-    'SELECT * FROM products',
+    'SELECT * FROM products;',
   );
   return camelize(products);
 };
