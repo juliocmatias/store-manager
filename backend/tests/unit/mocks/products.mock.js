@@ -13,6 +13,11 @@ const allProductsFromDB = [
   },
 ];
 
+const notFoundProduct = {
+  message: 'Product not found',
+};
+
 module.exports = {
   allProductsFromDB,
+  notFoundProduct,
 };

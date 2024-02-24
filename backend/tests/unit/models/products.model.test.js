@@ -20,6 +20,20 @@ describe('Testa productsModel', function () {
     expect(products).to.be.deep.equal(allProductsFromDB);
   });
 
+  it('Testa se faz a busca de um produto pelo id corretamente', async function () {
+    // triploA - Arrange, Act, Assert
+    // Arrange
+    const id = 1;
+    sinon.stub(connection, 'execute').resolves([[allProductsFromDB[0]]]);
+
+    // Act
+    const product = await productsModel.findById(id);
+
+    // Assert
+    expect(product).to.be.an('object');
+    expect(product).to.be.deep.equal(allProductsFromDB[0]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
