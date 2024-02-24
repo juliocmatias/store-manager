@@ -1,4 +1,4 @@
-const httpErrorMap = {
+const httpMap = {
   SUCCESSFUL: 200,
   CREATED: 201,
   NOT_FOUND: 404,
@@ -6,6 +6,6 @@ const httpErrorMap = {
   INVALID_VALUE: 422,
 };
 
-const mapStatusHTTP = (status) => httpErrorMap[status] || 500;
+const mapStatusHTTP = (status) => httpMap[status] || 500;
 
 module.exports = mapStatusHTTP;

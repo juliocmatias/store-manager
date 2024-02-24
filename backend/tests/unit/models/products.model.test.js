@@ -12,7 +12,7 @@ describe('Testa productsModel', function () {
 
     // Act
 
-    const products = await productsModel.getAllProductsFromDB();
+    const products = await productsModel.getAllFromDB();
 
     // Assert
     expect(products).to.be.an('array');
