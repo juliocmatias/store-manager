@@ -6,7 +6,7 @@ const { productsModel } = require('../../../src/models');
 const { allProductsFromDB, notFoundProduct } = require('../mocks/products.mock');
 const httpName = require('../../../src/utils/httpName');
 
-describe.only('Testa a productsService', function () {
+describe('Testa a productsService', function () {
   it('Testa se a service o retorno de todos os produtos', async function () {
     // triple A
 

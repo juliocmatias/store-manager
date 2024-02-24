@@ -17,7 +17,19 @@ const notFoundProduct = {
   message: 'Product not found',
 };
 
+const productsServiceSuccessful = {
+  status: 'SUCCESSFUL',
+  data: allProductsFromDB,
+};
+
+const findByIdProductService = {
+  status: 'SUCCESSFUL',
+  data: allProductsFromDB[0],
+}; 
+
 module.exports = {
   allProductsFromDB,
   notFoundProduct,
+  productsServiceSuccessful,
+  findByIdProductService,
 };
