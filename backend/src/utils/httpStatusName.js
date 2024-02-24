@@ -1,4 +1,4 @@
-const httpName = {
+const httpStatusName = {
   SUCCESSFUL: 'SUCCESSFUL',
   CREATED: 'CREATED',
   NOT_FOUND: 'NOT_FOUND',
@@ -6,4 +6,4 @@ const httpName = {
   INVALID_VALUE: 'INVALID_VALUE',
 };
 
-module.exports = httpName;
+module.exports = httpStatusName;
