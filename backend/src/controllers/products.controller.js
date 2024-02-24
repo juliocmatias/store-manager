@@ -7,6 +7,15 @@ const allProducts = async (_req, res) => {
   return res.status(mapStatusHTTPS(status)).json(data);
 };
 
+const productById = async (req, res) => {
+  const { id } = req.params;
+
+  const { status, data } = await productsService.getProductById(id);
+
+  return res.status(mapStatusHTTPS(status)).json(data);
+}; 
+
 module.exports = {
   allProducts,
+  productById,
 };
