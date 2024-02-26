@@ -6,7 +6,8 @@ const { productsService } = require('../../../src/services');
 const { productsServiceSuccessful, 
   allProductsFromDB,
   findByIdProductService,
-  insertProductService } = require('../mocks/products.mock'); 
+  insertProductService,
+  insertProductServiceRequired } = require('../mocks/products.mock'); 
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -110,6 +111,30 @@ describe('Testando o controller de products', function () {
 
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith({ id: 4, name: 'Martelo de Thor' });
+  });
+
+  it.only('Testa se na rota POST /products quando o nome produto não é passado retorna um mensagem de erro com status 400', async function () {
+    // triploA = 'Arrange, Act, Assert';
+    // Arrange
+    const req = {
+      body: {},
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.spy(),
+    };
+
+    sinon.stub(productsService, 'insertProduct').resolves(insertProductServiceRequired);
+
+    // Act
+
+    await productsController.insert(req, res);
+    
+    // Assert
+
+    expect(res.status).to.have.been.calledWith(400);
+    expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
   });
 
   afterEach(function () {

@@ -27,6 +27,11 @@ const findByIdProductService = {
   data: allProductsFromDB[0],
 };
 
+const insertProductServiceRequired = {
+  status: 'BAD_REQUEST',
+  data: { message: '"name" is required' },
+};
+
 const insertProductService = { status: 'CREATED', data: { id: 4, name: 'Martelo de Thor' } };
 
 module.exports = {
@@ -35,4 +40,5 @@ module.exports = {
   productsServiceSuccessful,
   findByIdProductService,
   insertProductService,
+  insertProductServiceRequired,
 };
