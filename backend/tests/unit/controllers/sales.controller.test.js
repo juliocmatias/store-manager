@@ -8,7 +8,7 @@ const { allSales, saleFindIdIs1, salesServiceSuccessful, findByIdSaleService, sa
 const { expect } = chai;
 chai.use(sinonChai);
 
-describe.only('Testando o controller de sales', function () {
+describe('Testando o controller de sales', function () {
   it('Testa se na rota GET /sales todas as vendas são retornadas', async function () {
     // triploA = 'Arrange, Act, Assert';
     // Arrange
