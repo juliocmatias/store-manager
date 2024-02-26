@@ -1,5 +1,6 @@
 const { productsModel } = require('../models');
 const httpStatusName = require('../utils/httpStatusName');
+const { nameProduct } = require('./validations/schemas');
 
 const getAllProducts = async () => {
   const products = await productsModel.getAllFromDB();
@@ -16,6 +17,12 @@ const getProductById = async (id) => {
 };
 
 const insertProduct = async (name) => {
+  const { error } = nameProduct.validate(name);
+  if (error) {
+    return { 
+      status: httpStatusName.INVALID_VALUE, data: { message: error.details[0].message } }; 
+  }
+
   const result = await productsModel.insert(name);
 
   return { status: httpStatusName.CREATED, data: { id: result.insertId, name } };
