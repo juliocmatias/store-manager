@@ -34,6 +34,11 @@ const insertProductServiceRequired = {
 
 const insertProductService = { status: 'CREATED', data: { id: 4, name: 'Martelo de Thor' } };
 
+const insertProductServiceInvalid = {
+  status: 'INVALID_VALUE',
+  data: { message: '"name" length must be at least 5 characters long' },
+};
+
 module.exports = {
   allProductsFromDB,
   notFoundProduct,
@@ -41,4 +46,5 @@ module.exports = {
   findByIdProductService,
   insertProductService,
   insertProductServiceRequired,
+  insertProductServiceInvalid,
 };

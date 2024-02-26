@@ -113,7 +113,7 @@ describe('Testando o controller de products', function () {
     expect(res.json).to.have.been.calledWith({ id: 4, name: 'Martelo de Thor' });
   });
 
-  it.only('Testa se na rota POST /products quando o nome produto não é passado retorna um mensagem de erro com status 400', async function () {
+  it('Testa se na rota POST /products quando o nome produto não é passado retorna um mensagem de erro com status 400', async function () {
     // triploA = 'Arrange, Act, Assert';
     // Arrange
     const req = {

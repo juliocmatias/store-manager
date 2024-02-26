@@ -4,6 +4,7 @@ const httpStatusName = {
   NOT_FOUND: 'NOT_FOUND',
   CONFLICT: 'CONFLICT',
   INVALID_VALUE: 'INVALID_VALUE',
+  BAD_REQUEST: 'BAD_REQUEST',
 };
 
 module.exports = httpStatusName;

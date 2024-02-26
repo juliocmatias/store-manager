@@ -3,7 +3,7 @@ const sinon = require('sinon');
 // const connection = require('../../../src/models/connection');
 const { productsService } = require('../../../src/services');
 const { productsModel } = require('../../../src/models');
-const { allProductsFromDB, notFoundProduct } = require('../mocks/products.mock');
+const { allProductsFromDB, notFoundProduct, insertProductServiceInvalid } = require('../mocks/products.mock');
 const httpStatusName = require('../../../src/utils/httpStatusName');
 
 describe('Testa a productsService', function () {
@@ -84,7 +84,28 @@ describe('Testa a productsService', function () {
     expect(response).to.have.property('status');
     expect(response).to.have.property('data');
     expect(response).to.be.deep.equal({ status: httpStatusName.CREATED, data: { id: 4, name } });
-  }); 
+  });
+
+  it('Testa se a service retorna uma mensagem de erro quando o nome do produto é menor que 5 caracteres', async function () {
+    // triple A
+
+    // Arrange
+
+    const name = 'Thor';
+    const insert = sinon.spy(productsModel, 'insert');
+
+    // Act
+
+    const response = await productsService.insertProduct(name);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal(insertProductServiceInvalid);
+    expect(insert.notCalled).to.be.equal(true);
+  });
 
   afterEach(function () {
     sinon.restore();
