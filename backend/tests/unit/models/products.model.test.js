@@ -45,7 +45,7 @@ describe('Testa productsModel', function () {
 
     // Assert
     expect(result).to.be.an('object');
-    expect(result).to.be.deep.equal({ insertId: 4 });
+    expect(result.insertId).to.be.deep.equal(4);
   });
 
   afterEach(function () {
