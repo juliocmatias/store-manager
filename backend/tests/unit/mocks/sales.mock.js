@@ -34,12 +34,6 @@ const saleFindIdIs1 = [
   },
 ];
 
-const saleFindIdIs2 = [{
-  date: dateMock,
-  productId: 3,
-  quantity: 15,
-}];
-
 const notFound = {
   message: 'Sale not found',
 };
@@ -60,5 +54,4 @@ module.exports = {
   salesServiceSuccessful,
   findByIdSaleService,
   saleFindIdIs1,
-  saleFindIdIs2,
 };
