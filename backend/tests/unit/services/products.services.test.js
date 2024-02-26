@@ -66,6 +66,26 @@ describe('Testa a productsService', function () {
     expect(response).to.be.deep.equal({ status: httpStatusName.NOT_FOUND, data: notFoundProduct });
   });
 
+  it('Testa se a service insere um produto corretamente', async function () {
+    // triple A
+
+    // Arrange
+
+    const name = 'Martelo de Thor';
+    sinon.stub(productsModel, 'insert').resolves({ insertId: 4 });
+
+    // Act
+
+    const response = await productsService.insertProduct(name);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal({ status: httpStatusName.CREATED, data: { id: 4, name } });
+  }); 
+
   afterEach(function () {
     sinon.restore();
   });
