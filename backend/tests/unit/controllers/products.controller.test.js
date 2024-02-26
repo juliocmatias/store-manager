@@ -5,7 +5,8 @@ const { productsController } = require('../../../src/controllers');
 const { productsService } = require('../../../src/services');
 const { productsServiceSuccessful, 
   allProductsFromDB,
-  findByIdProductService } = require('../mocks/products.mock'); 
+  findByIdProductService,
+  insertProductService } = require('../mocks/products.mock'); 
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -83,6 +84,32 @@ describe('Testando o controller de products', function () {
 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  it('Testa se na rota POST /products um produto é inserido', async function () {
+    // triploA = 'Arrange, Act, Assert';
+    // Arrange
+    const req = {
+      body: {
+        name: 'Martelo de Thor',
+      },
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.spy(),
+    };
+
+    sinon.stub(productsService, 'insertProduct').resolves(insertProductService);
+
+    // Act
+
+    await productsController.insert(req, res);
+    
+    // Assert
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith({ id: 4, name: 'Martelo de Thor' });
   });
 
   afterEach(function () {

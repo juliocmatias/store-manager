@@ -25,11 +25,14 @@ const productsServiceSuccessful = {
 const findByIdProductService = {
   status: 'SUCCESSFUL',
   data: allProductsFromDB[0],
-}; 
+};
+
+const insertProductService = { status: 'CREATED', data: { id: 4, name: 'Martelo de Thor' } };
 
 module.exports = {
   allProductsFromDB,
   notFoundProduct,
   productsServiceSuccessful,
   findByIdProductService,
+  insertProductService,
 };
