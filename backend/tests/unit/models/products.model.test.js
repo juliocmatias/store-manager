@@ -34,6 +34,20 @@ describe('Testa productsModel', function () {
     expect(product).to.be.deep.equal(allProductsFromDB[0]);
   });
 
+  it('Testa se insere um produto corretamente', async function () {
+    // triploA - Arrange, Act, Assert
+    // Arrange
+    const name = 'Martelo de Thor';
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
+
+    // Act
+    const result = await productsModel.insert(name);
+
+    // Assert
+    expect(result).to.be.an('object');
+    expect(result).to.be.deep.equal({ insertId: 4 });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
