@@ -45,7 +45,12 @@ const salesServiceSuccessful = {
 
 const findByIdSaleService = {
   status: 'SUCCESSFUL',
-  data: allSales[0],
+  data: saleFindIdIs1,
+};
+
+const saleNotFound = {
+  status: 'NOT_FOUND',
+  data: notFound,
 };
 
 module.exports = {
@@ -54,4 +59,5 @@ module.exports = {
   salesServiceSuccessful,
   findByIdSaleService,
   saleFindIdIs1,
+  saleNotFound,
 };
