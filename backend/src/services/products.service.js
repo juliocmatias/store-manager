@@ -28,8 +28,25 @@ const insertProduct = async (name) => {
   return { status: httpStatusName.CREATED, data: { id: result.insertId, name } };
 };
 
+const updateProduct = async (id, name) => {
+  const { error } = nameProduct.validate(name);
+  if (error) {
+    return { 
+      status: httpStatusName.INVALID_VALUE, data: { message: error.details[0].message } }; 
+  }
+
+  const [result] = await productsModel.update(id, name);
+
+  if (result.affectedRows === 0) {
+    return { status: httpStatusName.NOT_FOUND, data: { message: 'Product not found' } };
+  }
+
+  return { status: httpStatusName.SUCCESSFUL, data: { id, name } };
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   insertProduct,
+  updateProduct,
 };
