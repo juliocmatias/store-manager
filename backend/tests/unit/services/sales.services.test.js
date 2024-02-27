@@ -65,7 +65,7 @@ describe('Testa salesService', function () {
     expect(response).to.be.deep.equal(saleNotFound);
   });
 
-  it.only('Testa se a service insere uma nova venda com sucesso', async function () {
+  it('Testa se a service insere uma nova venda com sucesso', async function () {
     // TripleAAA
     // Arrange
     const executeStub = sinon.stub(salesModel, 'insert');
