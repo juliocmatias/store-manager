@@ -63,6 +63,20 @@ describe('Testa productsModel', function () {
     expect(result.affectedRows).to.be.deep.equal(1);
   });
 
+  it('Testa se a model deleteById deleta um produto corretamente', async function () {
+    // triploA - Arrange, Act, Assert
+    // Arrange
+    const id = 1;
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    // Act
+    const [result] = await productsModel.deleteById(id);
+
+    // Assert
+    expect(result).to.be.an('object');
+    expect(result.affectedRows).to.be.deep.equal(1);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
