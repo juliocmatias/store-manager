@@ -48,6 +48,21 @@ describe('Testa productsModel', function () {
     expect(result.insertId).to.be.deep.equal(4);
   });
 
+  it('Testa se a model atualiza um produto corretamente', async function () {
+    // triploA - Arrange, Act, Assert
+    // Arrange
+    const id = 1;
+    const name = 'Martelo de Thorto';
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    // Act
+    const [result] = await productsModel.update(id, name);
+
+    // Assert
+    expect(result).to.be.an('object');
+    expect(result.affectedRows).to.be.deep.equal(1);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
