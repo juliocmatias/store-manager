@@ -10,7 +10,7 @@ const allSales = async (_req, res) => {
 const saleById = async (req, res) => {
   const { id } = req.params;
 
-  const { status, data } = await salesService.getSaleById(id);
+  const { status, data } = await salesService.getSaleById(Number(id));
 
   return res.status(mapStatusHTTPS(status)).json(data);
 };

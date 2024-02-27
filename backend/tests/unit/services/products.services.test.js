@@ -113,7 +113,6 @@ describe('Testa a productsService', function () {
     // Arrange
 
     const id = 1;
-    const productIdString = id.toString();
     const name = 'Martelo de Thorto';
     sinon.stub(productsModel, 'update').resolves([{ affectedRows: 1 }]);
 
@@ -126,7 +125,7 @@ describe('Testa a productsService', function () {
     expect(response).to.be.an('object');
     expect(response).to.have.property('status');
     expect(response).to.have.property('data');
-    expect(response).to.be.deep.equal({ status: httpStatusName.SUCCESSFUL, data: { id: productIdString, name } });
+    expect(response).to.be.deep.equal({ status: httpStatusName.SUCCESSFUL, data: { id, name } });
   });
 
   it('Testa se a service updateProduct retorna um erro quando o produto não é encontrado', async function () {

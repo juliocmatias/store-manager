@@ -10,7 +10,7 @@ const allProducts = async (_req, res) => {
 const productById = async (req, res) => {
   const { id } = req.params;
 
-  const { status, data } = await productsService.getProductById(id);
+  const { status, data } = await productsService.getProductById(Number(id));
 
   return res.status(mapStatusHTTPS(status)).json(data);
 }; 
@@ -27,7 +27,7 @@ const update = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  const { status, data } = await productsService.updateProduct(id, name);
+  const { status, data } = await productsService.updateProduct(Number(id), name);
 
   return res.status(mapStatusHTTPS(status)).json(data);
 };
