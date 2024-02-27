@@ -149,6 +149,28 @@ describe('Testa a productsService', function () {
     expect(response).to.be.deep.equal({ status: httpStatusName.NOT_FOUND, data: { message: 'Product not found' } });
   });
 
+  it('Testa se a service updateProduct retorna uma mensagem de erro quando o nome do produto é menor que 5 caracteres', async function () {
+    // triple A
+
+    // Arrange
+
+    const id = 1;
+    const name = 'Thor';
+    const update = sinon.spy(productsModel, 'update');
+
+    // Act
+
+    const response = await productsService.updateProduct(id, name);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal(insertProductServiceInvalid);
+    expect(update.notCalled).to.be.equal(true);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
