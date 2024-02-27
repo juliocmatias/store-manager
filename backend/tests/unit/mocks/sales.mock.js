@@ -76,7 +76,7 @@ const salesSuccessService = {
 
 const salesUnprocessableEntity = {
   status: 'UNPROCESSABLE_ENTITY',
-  data: { message: '"quantity" must be larger than or equal to 1' },
+  data: { message: '"quantity" must be greater than or equal to 1' },
 };
 
 const salesServiceProductNotFound = {

@@ -8,7 +8,7 @@ const nameProduct = Joi.string()
 const quantityProduct = Joi.number()
   .integer()
   .min(1).messages({
-    'number.min': '"quantity" must be larger than or equal to 1',
+    'number.min': '"quantity" must be greater than or equal to 1',
     'number.integer': '"quantity" must be an integer',
   });
 
