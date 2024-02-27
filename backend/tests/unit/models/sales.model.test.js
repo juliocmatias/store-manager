@@ -47,7 +47,7 @@ describe('Testa salesModel', function () {
     ]);
   });
 
-  it.only('Testa se a model insere no DB uma nova venda', async function () {
+  it('Testa se a model insere no DB uma nova venda', async function () {
     // triploA - Arrange, Act, Assert
     // Arrange
     const insertId = salesSuccessModel.id;
