@@ -69,6 +69,11 @@ const salesSuccessModel = {
   itemsSold: salesProducts,
 };
 
+const salesSuccessService = {
+  status: 'CREATED',
+  data: salesSuccessModel,
+};
+
 module.exports = {
   allSales,
   notFound,
@@ -78,4 +83,5 @@ module.exports = {
   saleNotFound,
   salesProducts,
   salesSuccessModel,
+  salesSuccessService,
 };

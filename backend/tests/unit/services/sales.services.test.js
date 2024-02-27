@@ -2,7 +2,14 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
-const { allSales, saleFindIdIs1, salesServiceSuccessful, findByIdSaleService, saleNotFound } = require('../mocks/sales.mock');
+const { allSales, 
+  saleFindIdIs1, 
+  salesServiceSuccessful, 
+  findByIdSaleService, 
+  saleNotFound,
+  salesProducts,
+  salesSuccessModel,
+  salesSuccessService } = require('../mocks/sales.mock');
 
 describe('Testa salesService', function () {
   it('Testa se a service retorna todos as vendas com sucesso', async function () {
@@ -56,6 +63,25 @@ describe('Testa salesService', function () {
     expect(response).to.have.property('status');
     expect(response).to.have.property('data');
     expect(response).to.be.deep.equal(saleNotFound);
+  });
+
+  it.only('Testa se a service insere uma nova venda com sucesso', async function () {
+    // TripleAAA
+    // Arrange
+    const executeStub = sinon.stub(salesModel, 'insert');
+
+    executeStub.resolves(salesSuccessModel);
+
+    // Act
+
+    const response = await salesService.insertSale(salesProducts);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal(salesSuccessService);
   });
 
   afterEach(function () {
