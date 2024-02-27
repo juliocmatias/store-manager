@@ -5,6 +5,7 @@ const httpStatusName = {
   CONFLICT: 'CONFLICT',
   INVALID_VALUE: 'INVALID_VALUE',
   BAD_REQUEST: 'BAD_REQUEST',
+  UNPROCESSABLE_ENTITY: 'UNPROCESSABLE_ENTITY',
 };
 
 module.exports = httpStatusName;

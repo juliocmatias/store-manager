@@ -74,6 +74,11 @@ const salesSuccessService = {
   data: salesSuccessModel,
 };
 
+const salesUnprocessableEntity = {
+  status: 'UNPROCESSABLE_ENTITY',
+  data: { message: '"quantity" must be larger than or equal to 1' },
+};
+
 module.exports = {
   allSales,
   notFound,
@@ -84,4 +89,5 @@ module.exports = {
   salesProducts,
   salesSuccessModel,
   salesSuccessService,
+  salesUnprocessableEntity,
 };
