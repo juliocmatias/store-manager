@@ -2,7 +2,10 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { salesModel } = require('../../../src/models');
-const { allSales, saleFindIdIs1 } = require('../mocks/sales.mock');
+const { allSales, 
+  saleFindIdIs1,
+  salesProducts,
+  salesSuccessModel } = require('../mocks/sales.mock');
 
 describe('Testa salesModel', function () {
   it('Testa se a model retorna do DB todas as vendas', async function () {
@@ -42,6 +45,23 @@ describe('Testa salesModel', function () {
         quantity: 10,
       },
     ]);
+  });
+
+  it.only('Testa se a model insere no DB uma nova venda', async function () {
+    // triploA - Arrange, Act, Assert
+    // Arrange
+    const insertId = salesSuccessModel.id;
+    const executeStub = sinon.stub(connection, 'execute');
+
+    executeStub.onFirstCall().resolves([{ insertId }]);
+    executeStub.onCall(1).resolves([undefined]); 
+
+    // Act
+    const sale = await salesModel.insert(salesProducts);
+
+    // Assert
+    expect(sale).to.be.an('object');
+    expect(sale).to.be.deep.equal(salesSuccessModel);
   });
 
   afterEach(function () {

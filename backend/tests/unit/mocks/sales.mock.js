@@ -53,6 +53,22 @@ const saleNotFound = {
   data: notFound,
 };
 
+const salesProducts = [
+  {
+    productId: 1,
+    quantity: 5,
+  },
+  {
+    productId: 2,
+    quantity: 10,
+  },
+];
+
+const salesSuccessModel = {
+  id: 9999,
+  itemsSold: salesProducts,
+};
+
 module.exports = {
   allSales,
   notFound,
@@ -60,4 +76,6 @@ module.exports = {
   findByIdSaleService,
   saleFindIdIs1,
   saleNotFound,
+  salesProducts,
+  salesSuccessModel,
 };
