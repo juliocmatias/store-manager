@@ -3,7 +3,13 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const { salesController } = require('../../../src/controllers');
 const { salesService } = require('../../../src/services');
-const { allSales, saleFindIdIs1, salesServiceSuccessful, findByIdSaleService, saleNotFound } = require('../mocks/sales.mock');
+const { allSales, 
+  saleFindIdIs1, 
+  salesServiceSuccessful, 
+  findByIdSaleService, 
+  saleNotFound,
+  salesProducts,
+  salesSuccessService } = require('../mocks/sales.mock');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -56,9 +62,6 @@ describe('Testando o controller de sales', function () {
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(saleFindIdIs1);
   });
-  afterEach(function () {
-    sinon.restore();
-  });
 
   it('Testa se na rota GET /sales/:id ao id inválido a venda não é encontrada', async function () {
     // triploA = 'Arrange, Act, Assert';
@@ -84,5 +87,35 @@ describe('Testando o controller de sales', function () {
 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
+  });
+
+  it('Testa se na rota POST /sales é possível inserir uma nova venda', async function () {
+    // triploA = 'Arrange, Act, Assert';
+    // Arrange
+    const req = {
+      body: {
+        sales: salesProducts,
+      },
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.spy(),
+    };
+
+    sinon.stub(salesService, 'insertSale').resolves(salesSuccessService);
+
+    // Act
+
+    await salesController.insertSaleProducts(req, res);
+
+    // Assert
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(salesSuccessService.data);
+  });
+
+  afterEach(function () {
+    sinon.restore();
   });
 });
