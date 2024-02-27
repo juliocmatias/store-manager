@@ -29,6 +29,18 @@ const findById = async (id) => {
   );
   return camelize(sale);
 };
+const insert = async (sales) => {
+  // insertSaleId pega o id da venda que foi inserida 
+  const insertSaleId = [];
+  sales.forEach(async (sale) => {
+    const currentDate = new Date();
+    const [result] = await connection.execute(
+      'INSERT INTO sales (date) VALUES (?);',
+      [currentDate],
+    );
+    insertSaleId.push(result.insertId);
+  });
+};
 
 module.exports = {
   getAllFromDB,
