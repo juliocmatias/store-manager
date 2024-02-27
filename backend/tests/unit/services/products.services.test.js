@@ -107,7 +107,7 @@ describe('Testa a productsService', function () {
     expect(insert.notCalled).to.be.equal(true);
   });
 
-  it.only('Testa se a service updateProduct atualiza um produto corretamente', async function () {
+  it('Testa se a service updateProduct atualiza um produto corretamente', async function () {
     // triple A
 
     // Arrange
@@ -126,6 +126,27 @@ describe('Testa a productsService', function () {
     expect(response).to.have.property('status');
     expect(response).to.have.property('data');
     expect(response).to.be.deep.equal({ status: httpStatusName.SUCCESSFUL, data: { id, name } });
+  });
+
+  it('Testa se a service updateProduct retorna um erro quando o produto não é encontrado', async function () {
+    // triple A
+
+    // Arrange
+
+    const id = 99999;
+    const name = 'Martelo de Thorto';
+    sinon.stub(productsModel, 'update').resolves([{ affectedRows: 0 }]);
+
+    // Act
+
+    const response = await productsService.updateProduct(id, name);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal({ status: httpStatusName.NOT_FOUND, data: { message: 'Product not found' } });
   });
 
   afterEach(function () {
