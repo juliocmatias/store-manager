@@ -137,6 +137,32 @@ describe('Testando o controller de products', function () {
     expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
   });
 
+  it('Testa se na rota DELETE /products/:id um produto é deletado', async function () {
+    // triploA = 'Arrange, Act, Assert';
+    // Arrange
+    const req = {
+      params: {
+        id: 1,
+      },
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.spy(),
+    };
+
+    sinon.stub(productsService, 'deleteProduct').resolves({ status: 'NO_CONTENT' });
+
+    // Act
+
+    await productsController.deleteProduct(req, res);
+    
+    // Assert
+
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.json).to.have.been.calledWith();
+  });
+
   afterEach(function () {
     sinon.restore();
   });
