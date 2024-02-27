@@ -5,5 +5,6 @@ const validateRegisterProduct = require('../middlewares/validateRegisterProduct'
 route.get('/', productsController.allProducts);
 route.get('/:id', productsController.productById);
 route.post('/', validateRegisterProduct, productsController.insert);
+route.put('/:id', validateRegisterProduct, productsController.update);
 
 module.exports = route;
