@@ -171,6 +171,45 @@ describe('Testa a productsService', function () {
     expect(update.notCalled).to.be.equal(true);
   });
 
+  it('Testa se a service deleteProduct deleta um produto corretamente', async function () {
+    // triple A
+
+    // Arrange
+
+    const id = 1;
+    sinon.stub(productsModel, 'deleteById').resolves({ affectedRows: 1 });
+
+    // Act
+
+    const response = await productsService.deleteProduct(id);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.be.deep.equal({ status: httpStatusName.NO_CONTENT });
+  });
+
+  it('Testa se a service deleteProduct retorna um erro quando o produto não é encontrado', async function () {
+    // triple A
+
+    // Arrange
+
+    const id = 99999;
+    sinon.stub(productsModel, 'deleteById').resolves({ affectedRows: 0 });
+
+    // Act
+
+    const response = await productsService.deleteProduct(id);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal({ status: httpStatusName.NOT_FOUND, data: { message: 'Product not found' } });
+  });
+
   afterEach(function () {
     sinon.restore();
   });

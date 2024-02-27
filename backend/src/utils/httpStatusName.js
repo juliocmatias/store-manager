@@ -6,6 +6,7 @@ const httpStatusName = {
   INVALID_VALUE: 'INVALID_VALUE',
   BAD_REQUEST: 'BAD_REQUEST',
   UNPROCESSABLE_ENTITY: 'UNPROCESSABLE_ENTITY',
+  NO_CONTENT: 'NO_CONTENT',
 };
 
 module.exports = httpStatusName;
