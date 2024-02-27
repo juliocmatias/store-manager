@@ -29,6 +29,8 @@ const insertProduct = async (name) => {
 };
 
 const updateProduct = async (id, name) => {
+  const productIdString = id.toString();
+
   const { error } = nameProduct.validate(name);
   if (error) {
     return { 
@@ -41,7 +43,7 @@ const updateProduct = async (id, name) => {
     return { status: httpStatusName.NOT_FOUND, data: { message: 'Product not found' } };
   }
 
-  return { status: httpStatusName.SUCCESSFUL, data: { id, name } };
+  return { status: httpStatusName.SUCCESSFUL, data: { id: productIdString, name } };
 };
 
 module.exports = {
