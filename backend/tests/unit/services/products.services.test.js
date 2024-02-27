@@ -177,7 +177,7 @@ describe('Testa a productsService', function () {
     // Arrange
 
     const id = 1;
-    sinon.stub(productsModel, 'deleteById').resolves({ affectedRows: 1 });
+    sinon.stub(productsModel, 'deleteById').resolves([{ affectedRows: 1 }]);
 
     // Act
 
@@ -196,7 +196,7 @@ describe('Testa a productsService', function () {
     // Arrange
 
     const id = 99999;
-    sinon.stub(productsModel, 'deleteById').resolves({ affectedRows: 0 });
+    sinon.stub(productsModel, 'deleteById').resolves([{ affectedRows: 0 }]);
 
     // Act
 
