@@ -1,6 +1,7 @@
 const { salesModel } = require('../models');
 const httpStatusName = require('../utils/httpStatusName');
 const { quantityProduct } = require('./validations/schemas');
+const { productsModel } = require('../models');
 
 const getAllSales = async () => {
   const sales = await salesModel.getAllFromDB();
@@ -34,9 +35,27 @@ const validateQuantity = (sales) => {
   return null;
 };
 
+const validateProductId = async (sales) => {
+  const products = await productsModel.getAllFromDB();
+  const productsId = products.map((product) => product.id);
+  const salesId = sales.map((sale) => sale.productId);
+  const productsNotFound = salesId.filter((id) => !productsId.includes(id));
+  if (productsNotFound.length > 0) {
+    return { 
+      status: httpStatusName.NOT_FOUND, 
+      data: { message: 'Product not found' }, 
+    };
+  }
+
+  return null;
+};
+
 const insertSale = async (sales) => {
-  const validation = validateQuantity(sales);
-  if (validation) return validation;
+  const validationQuantity = validateQuantity(sales);
+  if (validationQuantity) return validationQuantity;
+
+  const validationProductId = await validateProductId(sales);
+  if (validationProductId) return validationProductId;
 
   const sale = await salesModel.insert(sales);
 

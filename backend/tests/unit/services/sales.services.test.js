@@ -2,6 +2,8 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
+const { productsModel } = require('../../../src/models');
+const { allProductsFromDB } = require('../mocks/products.mock');
 const { allSales, 
   saleFindIdIs1, 
   salesServiceSuccessful, 
@@ -10,7 +12,8 @@ const { allSales,
   salesProducts,
   salesSuccessModel,
   salesSuccessService,
-  salesUnprocessableEntity } = require('../mocks/sales.mock');
+  salesUnprocessableEntity,
+  salesServiceProductNotFound } = require('../mocks/sales.mock');
 
 describe('Testa salesService', function () {
   it('Testa se a service retorna todos as vendas com sucesso', async function () {
@@ -105,6 +108,27 @@ describe('Testa salesService', function () {
     expect(response).to.have.property('status');
     expect(response).to.have.property('data');
     expect(response).to.be.deep.equal(salesUnprocessableEntity);
+  });
+
+  it('Testa se a service retorna um erro ao tentar inserir uma venda com id produto não registrado no DB', async function () {
+    // TripleAAA
+    // Arrange
+    const sales = [
+      { productId: 999999, quantity: 1 },
+    ];
+    sinon.stub(productsModel, 'getAllFromDB').resolves(allProductsFromDB);
+    sinon.stub(salesModel, 'insert').resolves({});
+
+    // Act
+
+    const response = await salesService.insertSale(sales);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal(salesServiceProductNotFound);
   });
 
   afterEach(function () {
