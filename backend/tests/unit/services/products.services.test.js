@@ -7,7 +7,7 @@ const { allProductsFromDB, notFoundProduct, insertProductServiceInvalid } = requ
 const httpStatusName = require('../../../src/utils/httpStatusName');
 
 describe('Testa a productsService', function () {
-  it('Testa se a service o retorno de todos os produtos', async function () {
+  it('Testa se a service getAllProducts o retorno de todos os produtos', async function () {
     // triple A
 
     // Arrange
@@ -26,7 +26,7 @@ describe('Testa a productsService', function () {
     expect(response).to.be.deep.equal({ status: httpStatusName.SUCCESSFUL, data: allProductsFromDB });
   });
 
-  it('Testa se a service o retorno de um produto quando passado um id valido', async function () {
+  it('Testa se a service getProductById o retorno de um produto quando passado um id valido', async function () {
     // triple A
 
     // Arrange
@@ -46,7 +46,7 @@ describe('Testa a productsService', function () {
     expect(response).to.be.deep.equal({ status: httpStatusName.SUCCESSFUL, data: allProductsFromDB[0] });
   });
 
-  it(('Testa se a service retorna um erro quando passado um id invalido'), async function () {
+  it(('Testa se a service getProductById retorna um erro quando passado um id invalido'), async function () {
     // triple A
 
     // Arrange
@@ -66,7 +66,7 @@ describe('Testa a productsService', function () {
     expect(response).to.be.deep.equal({ status: httpStatusName.NOT_FOUND, data: notFoundProduct });
   });
 
-  it('Testa se a service insere um produto corretamente', async function () {
+  it('Testa se a service insertProduct insere um produto corretamente', async function () {
     // triple A
 
     // Arrange
@@ -86,7 +86,7 @@ describe('Testa a productsService', function () {
     expect(response).to.be.deep.equal({ status: httpStatusName.CREATED, data: { id: 4, name } });
   });
 
-  it('Testa se a service retorna uma mensagem de erro quando o nome do produto é menor que 5 caracteres', async function () {
+  it('Testa se a service insertProduct retorna uma mensagem de erro quando o nome do produto é menor que 5 caracteres', async function () {
     // triple A
 
     // Arrange
@@ -105,6 +105,27 @@ describe('Testa a productsService', function () {
     expect(response).to.have.property('data');
     expect(response).to.be.deep.equal(insertProductServiceInvalid);
     expect(insert.notCalled).to.be.equal(true);
+  });
+
+  it.only('Testa se a service updateProduct atualiza um produto corretamente', async function () {
+    // triple A
+
+    // Arrange
+
+    const id = 1;
+    const name = 'Martelo de Thorto';
+    sinon.stub(productsModel, 'update').resolves([{ affectedRows: 1 }]);
+
+    // Act
+
+    const response = await productsService.updateProduct(id, name);
+
+    // Assert
+
+    expect(response).to.be.an('object');
+    expect(response).to.have.property('status');
+    expect(response).to.have.property('data');
+    expect(response).to.be.deep.equal({ status: httpStatusName.SUCCESSFUL, data: { id, name } });
   });
 
   afterEach(function () {
