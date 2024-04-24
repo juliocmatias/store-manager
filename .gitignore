@@ -295,3 +295,5 @@ reports
 
 # stryker temp files
 .stryker-tmp
+
+/backend/node_modules
