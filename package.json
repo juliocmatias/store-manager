@@ -1,0 +1,16 @@
+{
+  "name": "store-manager",
+  "version": "1.0.0",
+  "description": "A store manager application",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd ./backend && npm install",
+    "start": "cd ./backend && npm run start",
+    "dev": "cd ./backend && npm run dev",
+    "test": "cd ./backend && npm run test:mocha",
+    "coverage": "cd ./backend && npm run test:coverage"
+  },
+  "keywords": [],
+  "author": "Julio Matias",
+  "license": "MIT"
+}
