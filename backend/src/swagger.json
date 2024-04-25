@@ -373,8 +373,7 @@
                   "itemsSold": [
                     {
                       "productId": 1,
-                      "quantity": 1,
-                      "productName": "Product 1"
+                      "quantity": 1
                     }
                   ]
                 }
@@ -571,21 +570,17 @@
                 "quantity": {
                   "type": "integer",
                   "format": "int64"
-                },
-                "productName": {
-                  "type": "string"
                 }
               },
               "required": [
-                "productId", "quantity", "productName"
+                "productId", "quantity"
               ]
             }
           }
         },
         "required": [
-          "saleId"
+          "saleId", "itemsSold"
         ]
-      
       },
       "Error": {
         "type": "object",
