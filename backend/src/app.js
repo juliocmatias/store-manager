@@ -1,10 +1,14 @@
 const express = require('express');
+const swaggerUI = require('swagger-ui-express');
 const { productsRoutes } = require('./routes');
 const { salesRoutes } = require('./routes');
 
 const app = express();
 
 app.use(express.json());
+
+app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(require('./swagger.json')));
+
 app.use('/products', productsRoutes);
 app.use('/sales', salesRoutes);
 
