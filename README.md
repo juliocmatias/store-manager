@@ -64,7 +64,7 @@ It's also important to remember that to run an API using Docker, you'll need to 
 
 After cloning and accessing the project directory. Install the dependencies with `npm install` if you don't have Node.js installed, just follow the instructions in Docker.
 
-Run `docker-compose up -d` in the terminal and stop the API container with `docker stop talker_manager`. After this step:
+Run `docker-compose up -d` in the terminal and stop the API container with `docker stop store_manager`. After this step:
 
 ```bash
 # access access the API with this command in the terminal
