@@ -4,7 +4,6 @@ const connection = require('../../../src/models/connection');
 const { salesModel } = require('../../../src/models');
 const { allSales, 
   saleFindIdIs1,
-  salesProducts,
   salesSuccessModel } = require('../mocks/sales.mock');
 
 describe('Testa salesModel', function () {
@@ -59,10 +58,19 @@ describe('Testa salesModel', function () {
     const executeStub = sinon.stub(connection, 'execute');
 
     executeStub.onFirstCall().resolves([{ insertId }]);
-    executeStub.onCall(1).resolves([undefined]); 
+    executeStub.resolves([{ affectedRows: 1 }]);
 
     // Act
-    const sale = await salesModel.insert(salesProducts);
+    const sale = await salesModel.insert([
+      {
+        productId: 1,
+        quantity: 5,
+      },
+      {
+        productId: 2,
+        quantity: 10,
+      },
+    ]);
 
     // Assert
     expect(sale).to.be.an('object');

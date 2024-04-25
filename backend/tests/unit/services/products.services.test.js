@@ -71,7 +71,8 @@ describe('Testa a productsService', function () {
 
     // Arrange
 
-    const name = 'Martelo de Thor';
+    const name = 'Martelo de Thorto';
+    sinon.stub(productsModel, 'getAllFromDB').resolves(allProductsFromDB);
     sinon.stub(productsModel, 'insert').resolves({ insertId: 4 });
 
     // Act

@@ -1,5 +1,3 @@
-const products = require('./products.mock');
-
 const dateMock = '2024-02-24T21:27:35.000Z';
 
 const allSales = [
@@ -73,12 +71,10 @@ const saleNotFound = {
 const salesProducts = [
   {
     productId: 1,
-    productName: products.allProductsFromDB.find((product) => product.id === 1).name,
     quantity: 5,
   },
   {
     productId: 2,
-    productName: products.allProductsFromDB.find((product) => product.id === 2).name,
     quantity: 10,
   },
 ];
