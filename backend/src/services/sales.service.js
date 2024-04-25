@@ -51,6 +51,20 @@ const validateProductId = async (sales) => {
 };
 
 const insertSale = async (sales) => {
+  if (sales.length === 0) {
+    return { 
+      status: httpStatusName.INVALID_VALUE, 
+      data: { message: 'Sale must have at least one product' }, 
+    };
+  }
+
+  if (!Array.isArray(sales)) {
+    return { 
+      status: httpStatusName.INVALID_VALUE, 
+      data: { message: 'Sale must be an array' }, 
+    };
+  }
+
   const validationQuantity = validateQuantity(sales);
   if (validationQuantity) return validationQuantity;
 
