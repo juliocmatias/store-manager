@@ -33,18 +33,23 @@ describe('Testa salesModel', function () {
 
     // Assert
     expect(sale[0]).to.be.an('object');
-    expect(sale).to.be.deep.equal([
-      {
-        date: '2024-02-24T21:27:35.000Z',
-        productId: 1,
-        quantity: 5,
-      },
-      {
-        date: '2024-02-24T21:27:35.000Z',
-        productId: 2,
-        quantity: 10,
-      },
-    ]);
+    expect(sale).to.be.deep.equal([{
+      saleId: 1,
+      sales: [
+        {
+          date: '2024-02-24T21:27:35.000Z',
+          productId: 1,
+          productName: 'Martelo de Thor',
+          quantity: 5,
+        },
+        {
+          date: '2024-02-24T21:27:35.000Z',
+          productId: 2,
+          productName: 'Traje de encolhimento',
+          quantity: 10,
+        },
+      ],
+    }]);
   });
 
   it('Testa se a model insere no DB uma nova venda', async function () {

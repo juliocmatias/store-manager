@@ -1,38 +1,55 @@
+const products = require('./products.mock');
+
 const dateMock = '2024-02-24T21:27:35.000Z';
 
 const allSales = [
   {
     saleId: 1,
-    date: dateMock,
-    productId: 1,
-    quantity: 5,
-  },
-  {
-    saleId: 1,
-    date: dateMock,
-    productId: 2,
-    quantity: 10,
+    sales: [
+      {
+        date: dateMock,
+        productId: 1,
+        productName: 'Martelo de Thor',
+        quantity: 5,
+      },
+      {
+        date: dateMock,
+        productId: 2,
+        productName: 'Traje de encolhimento',
+        quantity: 10,
+      },
+    ],
   },
   {
     saleId: 2,
-    date: dateMock,
-    productId: 3,
-    quantity: 15,
+    sale: [
+      {
+        date: dateMock,
+        productId: 3,
+        productName: 'Escudo do CapitÃ£o AmÃ©rica',
+        quantity: 15,
+      },
+    ],
   },
 ];
 
-const saleFindIdIs1 = [
-  {
-    date: dateMock,
-    productId: 1,
-    quantity: 5,
-  },
-  {
-    date: dateMock,
-    productId: 2,
-    quantity: 10,
-  },
-];
+const saleFindIdIs1 = [{
+  saleId: 1,
+  sales: [
+    {
+      date: dateMock,
+      productId: 1,
+      productName: 'Martelo de Thor',
+      quantity: 5,
+    },
+    {
+      date: dateMock,
+      productId: 2,
+      productName: 'Traje de encolhimento',
+      quantity: 10,
+    },
+  ],
+}];
 
 const notFound = {
   message: 'Sale not found',
@@ -56,10 +73,12 @@ const saleNotFound = {
 const salesProducts = [
   {
     productId: 1,
+    productName: products.allProductsFromDB.find((product) => product.id === 1).name,
     quantity: 5,
   },
   {
     productId: 2,
+    productName: products.allProductsFromDB.find((product) => product.id === 2).name,
     quantity: 10,
   },
 ];
@@ -97,3 +116,53 @@ module.exports = {
   salesUnprocessableEntity,
   salesServiceProductNotFound,
 };
+
+// [
+//   {
+//     saleId: 1,
+//     sales: [
+//       {
+//         date: '2024-04-24T18:25:48.000Z',
+//         productId: 1,
+//         productName: 'Martelo de Thor',
+//         quantity: 5,
+//       },
+//       {
+//         date: '2024-04-24T18:25:48.000Z',
+//         productId: 2,
+//         productName: 'Traje de encolhimento',
+//         quantity: 10,
+//       },
+//     ],
+//   },
+//   {
+//     saleId: 2,
+//     sale: [
+//       {
+//         date: '2024-04-24T18:25:48.000Z',
+//         productId: 3,
+//         productName: 'Escudo do CapitÃ£o AmÃ©rica',
+//         quantity: 15,
+//       },
+//     ],
+//   },
+// ];
+
+// SELECT
+//     SP.sale_id AS saleId,
+//     JSON_ARRAYAGG(
+//         JSON_OBJECT(
+//             'date', SA.date,
+//             'productId', SP.product_id,
+//             'productName', PR.name,
+//             'quantity', SP.quantity
+//         )
+//     ) AS sales
+// FROM
+//     sales_products AS SP
+// INNER JOIN
+//     sales AS SA ON SP.sale_id = SA.id
+// INNER JOIN
+//     products AS PR ON SP.product_id = PR.id
+// GROUP BY
+//     SP.sale_id
