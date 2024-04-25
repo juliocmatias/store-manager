@@ -49,8 +49,11 @@ For the API to start working, you first have to run docker-compose:
 
 By running this command the API is functional and can receive requests
 
-It's important to note that the containers will run on port 3001 for the API and 3306 for the MySQL database. Therefore, if you're using them, make sure to first terminate any apps or processes that utilize these ports.
+If you need to reset the database, run the command:
 
+`npm run db:reset`
+
+It's important to note that the containers will run on port 3001 for the API and 3306 for the MySQL database. Therefore, if you're using them, make sure to first terminate any apps or processes that utilize these ports.
 
 It's also important to remember that to run an API using Docker, you'll need to have it installed and configured on your machine. Consult the documentation to learn more about [Docker](https://docs.docker.com/get-docker/).
 
