@@ -8,7 +8,8 @@
     "start": "cd ./backend && npm run start",
     "dev": "cd ./backend && npm run dev",
     "test": "cd ./backend && npm run test:mocha",
-    "coverage": "cd ./backend && npm run test:coverage"
+    "coverage": "cd ./backend && npm run test:coverage",
+    "db:reset": "docker exec -i store_manager_db bash -c 'mysql -u root -p\"$MYSQL_ROOT_PASSWORD\" StoreManager < /docker-entrypoint-initdb.d/01-migration.sql && mysql -u root -p\"$MYSQL_ROOT_PASSWORD\" StoreManager < /docker-entrypoint-initdb.d/02-seed.sql'"
   },
   "keywords": [],
   "author": "Julio Matias",
