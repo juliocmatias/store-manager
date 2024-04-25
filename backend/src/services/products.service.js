@@ -23,6 +23,14 @@ const insertProduct = async (name) => {
       status: httpStatusName.INVALID_VALUE, data: { message: error.details[0].message } }; 
   }
 
+  const allProducts = await productsModel.getAllFromDB();
+
+  const productExists = allProducts.find((product) => product.name === name);
+
+  if (productExists) {
+    return { status: httpStatusName.INVALID_VALUE, data: { message: 'Product already exists' } };
+  }
+
   const result = await productsModel.insert(name);
 
   return { status: httpStatusName.CREATED, data: { id: result.insertId, name } };
